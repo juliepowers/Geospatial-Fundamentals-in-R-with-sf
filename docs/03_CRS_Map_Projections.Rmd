@@ -1,6 +1,8 @@
 ---
 title: An R Markdown document converted from "./03_CRS_Map_Projections.ipynb"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -48,7 +50,7 @@ library(tmap)
 Let's go ahead and bring back in our California County shapefile. As before, we can read the file in using `st_read` and plot it straight away.
 
 ```{r}
-counties = st_read('notebook_data/california_counties/CaliforniaCounties.shp')
+counties <- st_read('../notebook_data/california_counties/CaliforniaCounties.shp')
 plot(counties$geometry, col='darkgreen')
 ```
 
@@ -290,6 +292,7 @@ st_crs(states_limited) = st_crs(states)
 ```{r}
 # Check it again
 st_crs(states_limited)
+st_crs(states)
 ```
 
 ## PHEW! Okay! ... Never do that again! :)
@@ -326,6 +329,7 @@ plot(states_limited_utm10$geometry, asp=1)
 
 ```{r}
 # Your thoughts here
+# https://projectionwizard.org/ can help with figuring out best projection
 ```
 
 <img src="http://www.pngall.com/wp-content/uploads/2016/03/Light-Bulb-Free-PNG-Image.png" width="20" align=left >  **Question**
@@ -336,11 +340,12 @@ plot(states_limited_utm10$geometry, asp=1)
 
 
 ```{r}
-# YOUR CODE HERE
+# YOUR CODE HERE : -`5070: CONUS NAD83` (units meters) projected CRS for mapping the entire contiguous USA (CONUS)
 
+states_conus <- st_transform(states_limited, crs=5070)
 
-
-
+plot(states_conus)
+plot(states_conus$geometry, asp=1)
 
 ```
 
@@ -378,7 +383,7 @@ counties_conus = st_transform(counties, crs = 5070)
 ```
 
 ```{r, eval=F}
-plot(states_limited_conus$geometry, col = 'lightgrey')
+plot(states_conus$geometry, col = 'lightgrey')
 plot(counties_conus$geometry, col = 'darkgreen', add=T)
 ```
 

@@ -1,6 +1,8 @@
 ---
 title: An R Markdown document converted from "./02_Introduction_to_sf.ipynb"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -80,7 +82,9 @@ Let's try it out with California counties, and use `sf` for the first time. `sf:
 
 ```{r}
 # Read in the counties shapefile
-counties = st_read('notebook_data/california_counties/CaliforniaCounties.shp')
+getwd()
+setwd("C:/Users/Julie Powers/Box/Coursework/Cal_courses/R_geospatial/Geospatial-Fundamentals-in-R-with-s")
+counties = st_read('../notebook_data/california_counties/CaliforniaCounties.shp')
 ```
 
 ```{r}
@@ -261,7 +265,7 @@ Let's not forget to save out our `alameda_county` object. This way we won't need
 We can save it as a shapefile.
 
 ```{r}
-st_write(alameda_county, "outdata/alameda_county.shp", delete_dsn=T)
+st_write(alameda_county, '../outdata/alameda_county.shp', delete_dsn=T)
 ```
 
 One of the problems of saving to a shapefile is that our column names get truncated to 10 characters (a shapefile limitation.) 
@@ -328,9 +332,10 @@ To see the solution, look at the hidden text below.
 
 ```{r}
 # YOUR CODE HERE
-
-
-
+california <- st_read("notebook_data/census/Places/cb_2018_06_place_500k.shp")
+berkeley <- california[california$NAME == 'Berkeley',]
+plot(berkeley$geometry, col = 'darkblue', border = 'green', main = "City of Berkeley")
+st_write(berkeley, "outdata/berkeley.shp")
 
 
 

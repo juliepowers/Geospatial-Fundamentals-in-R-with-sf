@@ -1,6 +1,8 @@
 ---
 title: An R Markdown document converted from "./04_More_Data_More_Maps.ipynb"
 output: html_document
+editor_options: 
+  chunk_output_type: console
 ---
 
 # Lesson 4. More Data, More Maps!
@@ -47,7 +49,7 @@ We're going to bring in data bike boulevards in Berkeley. Note two things that a
 - We have a **line** geometry GeoDataFrame (our county and states data had **polygon** geometries)
 
 ```{r}
-bike_blvds = st_read('notebook_data/transportation/BerkeleyBikeBlvds.geojson')
+bike_blvds = st_read('../notebook_data/transportation/BerkeleyBikeBlvds.geojson')
 plot(bike_blvds$geometry)
 ```
 
@@ -196,7 +198,7 @@ To see the solution, look at the hidden text below.
 
 ```{r}
 # YOUR CODE HERE:
-
+st_read(`notebook_data/parcels/parcel_pts_rand30pct.geojson`)
 
 
 
